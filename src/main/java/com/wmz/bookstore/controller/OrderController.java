@@ -53,6 +53,13 @@ public class OrderController {
         }
     }
 
+    /**
+     * 生成订单
+     * @param model
+     * @param cartId
+     * @param request
+     * @return
+     */
     @GetMapping("/addOrder")
     public String addOrder(Model model, int cartId, HttpServletRequest request){
         Cart cart = cartService.queryCartByCartId(cartId);

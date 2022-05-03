@@ -95,6 +95,11 @@ public class UserController {
         return modelAndView;
     }
 
+    /**
+     * 注销
+     * @param request
+     * @return
+     */
     @GetMapping("/logOut")
     public ModelAndView logOut(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();

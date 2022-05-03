@@ -18,6 +18,11 @@ public class BookController {
     @Autowired
     BookRepository bookRepository;
 
+    /**
+     * 增加库存
+     * @param bookName
+     * @return
+     */
     @GetMapping("/addStock")
     public ModelAndView addStock(String bookName){
         ModelAndView modelAndView = new ModelAndView();
@@ -30,6 +35,12 @@ public class BookController {
         return modelAndView;
     }
 
+    /**
+     * 修改价格
+     * @param price
+     * @param bookName
+     * @return
+     */
     @GetMapping("/updatePrice")
     public ModelAndView updatePrice(int price, String bookName){
         ModelAndView modelAndView = new ModelAndView();

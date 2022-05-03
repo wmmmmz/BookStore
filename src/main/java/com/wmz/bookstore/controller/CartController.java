@@ -80,6 +80,14 @@ public class CartController {
         return "index";
     }
 
+    /**
+     * 更新购物车商品数量
+     * @param model
+     * @param flag
+     * @param cartId
+     * @param request
+     * @return
+     */
     @GetMapping("/updateCart")
     public String updateCart(Model model, int flag, int cartId, HttpServletRequest request){
         Cart cart = cartService.queryCartByCartId(cartId);
