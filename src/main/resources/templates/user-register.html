@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+
+</head>
+<body>
+<!--    头部引用header.html-->
+    <div th:insert="~{header::copy}"></div>
+<!--注册表单-->
+    <div class = "container">
+        <form th:action="@{/user/register}" th:object="${user}" method="post">
+            <div class = "register-top">
+                <br><h3 class="text-center">注册新用户</h3>
+                <div class="input">
+                    <label for="username" class="form-label">用户名:</label>
+                    <input type="text" th:field="*{username}" class="form-control" id="username" placeholder="请输入用户名" name="username">
+                </div>
+                <div class="input">
+                    <label for="pwd" class="form-label">密码:</label>
+                    <input type="password" th:field="*{password}" class="form-control" id="pwd" placeholder="请输入密码" name="pswd">
+                </div>
+                <div class="input">
+                    <label for="acceptTel" class="form-label">电话:</label>
+                    <input type="text" th:field="*{telephone}" class="form-control" id="acceptTel" placeholder="请输入联系电话" name="acceptTel">
+                </div>
+                <div class="input">
+                    <label for="acceptAddress" class="form-label">地址:</label>
+                    <input type="text" th:field="*{address}" class="form-control" id="acceptAddress" placeholder="请输入收货地址" name="acceptAddress">
+                </div>
+                <span th:text="${errorMsg}"></span><br>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">注册</button>
+                </div>
+            </div>
+        </form>
+    </div>
+<!--    尾部引用footer.html-->
+    <div th:insert="~{footer::copy}"></div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:width="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>我的购物车</title>
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+</head>
+<body>
+    <!--    头部引用header.html-->
+    <div th:insert="~{header::copy}"></div>
+    <div class="container">
+        <br><h3 class="text-center">我的购物车</h3><br>
+        <span th:text="${errorMsg}"></span>
+        <table class="table table-hover">
+            <tr>
+                <th style="width: 100px" th:text="书名"></th>
+                <th style="width: 100px" th:text="件数"></th>
+                <th style="width: 300px" th:text="操作"></th>
+            </tr>
+        </table>
+        <table class="table table-hover" th:each="cart : ${cartList}">
+            <tr>
+                <td style="width: 100px" th:text="${cart.book.bookName}"></td>
+                <td style="width: 100px" th:text="${cart.count}"></td>
+                <td style="width: 100px">
+                    <a th:href="@{/cart/updateCart(flag = 1,cartId = ${cart.id})}">+</a>
+                </td>
+                <td style="width: 100px">
+                    <a th:href="@{/cart/updateCart(flag = -1,cartId = ${cart.id})}">-</a>
+                </td>
+                <td style="width: 100px">
+                    <a th:href="@{/order/addOrder(cartId = ${cart.id})}">生成订单</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

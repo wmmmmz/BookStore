@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wmz.bookstore.mapper.CartMapper">
+
+    <resultMap id="CartAndBookAndUser" type="Cart">
+        <id property="id" column="id"/>
+        <result property="count" column="count"/>
+        <association property="book" javaType="Book">
+            <id property="id" column="book_id"/>
+            <result property="bookName" column="book_name"/>
+            <result property="price" column="price"/>
+        </association>
+        <association property="user" javaType="User">
+            <id property="id" column="user_id"/>
+            <result property="username" column="username"/>
+        </association>
+    </resultMap>
+
+
+    <select id="queryAllBooksInCartOfUser" resultMap="CartAndBookAndUser">
+        select *
+        from bookstore.cart
+            left join bookstore.book on book.id = cart.book_id
+            left join bookstore.user on user.id = cart.user_id
+        where user.username = #{username}
+    </select>
+
+    <update id="addToCart" parameterType="int">
+        update bookstore.cart
+        set cart.count = #{newCount}
+        where cart.book_id= #{bookId} and cart.user_id = #{userId}
+    </update>
+
+    <insert id="addCart" parameterType="int">
+        insert into bookstore.cart(count, book_id, user_id)
+        values (#{count}, #{bookId}, #{userId});
+    </insert>
+
+    <select id="queryCartByBookIdAndUserId" resultMap="CartAndBookAndUser">
+        select *
+        from bookstore.cart
+                 left join bookstore.book on book.id = cart.book_id
+                 left join bookstore.user on user.id = cart.user_id
+        where user.id = #{userId} and book.id = #{bookId}
+    </select>
+
+    <select id="queryCartByCartId" resultMap="CartAndBookAndUser">
+        select *
+        from bookstore.cart
+                 left join bookstore.book on book.id = cart.book_id
+                 left join bookstore.user on user.id = cart.user_id
+        where cart.id = #{cartId}
+    </select>
+
+    <delete id="deleteCartByCartId" parameterType="int">
+        delete
+        from bookstore.cart
+        where cart.id = #{cartId}
+    </delete>
+</mapper>

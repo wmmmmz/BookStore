@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>首页</title>
+  <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+        th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+        rel="stylesheet" media="screen" />
+  <script src="/webjars/jquery/3.3.1/jquery.min.js"
+          th:src="@{/webjars/jquery/jquery.min.js}"></script>
+</head>
+<body>
+  <!--    头部引用header.html-->
+  <div th:insert="~{header::copy}"></div>
+  <div class="container">
+    <table class="table table-hover">
+      <tr>
+        <th style="width: 150px" th:text="书名"></th>
+        <th style="width: 150px" th:text="作者"></th>
+        <th style="width: 150px" th:text="价格"></th>
+        <th style="width: 150px" th:text="库存"></th>
+        <th style="width: 150px" th:text="加入购物车"></th>
+      </tr>
+    </table>
+    <table class="table table-hover" th:each="book : ${bookList}">
+      <tr>
+        <td style="width: 100px" th:text="${book.bookName}"></td>
+        <td style="width: 100px" th:text="${book.author}"></td>
+        <th style="width: 100px" th:text="${book.price}"></th>
+        <th style="width: 100px" th:text="${book.stock}"></th>
+        <td style="width: 100px"><a th:href="@{/cart/addToCart(bookId = ${book.id})}">加入购物车</a></td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

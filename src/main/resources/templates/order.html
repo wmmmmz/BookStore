@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:width="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>我的订单</title>
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+</head>
+<body>
+    <!--    头部引用header.html-->
+    <div th:insert="~{header::copy}"></div>
+    <div class="container">
+        <br><h3 class="text-center">我的订单</h3><br>
+        <span th:text="${errorMsg}"></span>
+        <table class="table table-hover">
+            <tr>
+                <th style="width: 100px" th:text="书名"></th>
+                <th style="width: 100px" th:text="件数"></th>
+                <th style="width: 100px" th:text="总价"></th>
+                <th style="width: 100px" th:text="下单时间"></th>
+            </tr>
+        </table>
+        <table class="table table-hover" th:each="order : ${orderList}">
+            <tr>
+                <td style="width: 100px" th:text="${order.book.bookName}"></td>
+                <td style="width: 100px" th:text="${order.count}"></td>
+                <td style="width: 100px" th:text="${order.sumPrice}"></td>
+                <td style="width: 100px" th:text="${order.date}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

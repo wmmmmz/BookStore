@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理</title>
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+</head>
+<body>
+<!--    头部引用header.html-->
+<div th:insert="~{header::copy}"></div>
+<div class="container">
+    <br><h3 class="text-center">网上书城管理页面</h3><br>
+    <table class="table table-hover">
+        <tr>
+            <td style="width: 100px" th:text="书名"></td>
+            <td style="width: 100px" th:text="作者"></td>
+            <td style="width: 100px" th:text="价格"></td>
+            <td style="width: 100px" th:text="库存"></td>
+            <td style="width: 200px" th:text="操作"></td>
+        </tr>
+    </table>
+    <table class="table table-hover" th:each="book : ${bookList}">
+        <tr>
+            <td style="width: 100px" th:text="${book.bookName}"></td>
+            <td style="width: 100px" th:text="${book.author}"></td>
+            <td style="width: 100px" th:text="${book.price}"></td>
+            <td style="width: 100px" th:text="${book.stock}"></td>
+            <td style="width: 100px">
+                <a th:href="@{/book/addStock(bookName = ${book.bookName})}">增加库存</a>
+            </td>
+            <td style="width: 100px">
+                <form th:action="@{/book/updatePrice}" method="get">
+                    <input style="width: 30px" type = "text" name = "price">
+                    <input  class="input-group-sm" type = "hidden" th:value = "${book.bookName}" name="bookName">
+                    <button class="btn btn-default btn-xs" type="submit">修改价格</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
